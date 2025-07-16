@@ -1,4 +1,6 @@
 {
-  "rootDirectory": "web",
+  "installCommand": "cd web && npm install",
+  "buildCommand": "cd web && npm install lightningcss-linux-x64-gnu && npm run build",
+  "outputDirectory": "web/.next",
   "framework": "nextjs"
 }
