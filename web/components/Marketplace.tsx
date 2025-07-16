@@ -84,19 +84,6 @@ export function Marketplace() {
     }
   })
 
-  if (!isConnected) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Marketplace</CardTitle>
-          <CardDescription>
-            Connect your wallet to view and create lending offers
-          </CardDescription>
-        </CardHeader>
-      </Card>
-    )
-  }
-
   return (
     <div className="space-y-6">
       <Card>
@@ -108,13 +95,14 @@ export function Marketplace() {
                 Browse and create lending offers for conditional tokens
               </CardDescription>
             </div>
-            <Dialog open={isCreateOfferOpen} onOpenChange={setIsCreateOfferOpen}>
-              <DialogTrigger asChild>
-                <Button>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Create Offer
-                </Button>
-              </DialogTrigger>
+            {isConnected ? (
+              <Dialog open={isCreateOfferOpen} onOpenChange={setIsCreateOfferOpen}>
+                <DialogTrigger asChild>
+                  <Button>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create Offer
+                  </Button>
+                </DialogTrigger>
               <DialogContent className="sm:max-w-[525px]">
                 <DialogHeader>
                   <DialogTitle>Create Lending Offer</DialogTitle>
@@ -183,6 +171,12 @@ export function Marketplace() {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
+            ) : (
+              <Button onClick={() => alert('Please connect your wallet to create offers')}>
+                <Plus className="h-4 w-4 mr-2" />
+                Create Offer
+              </Button>
+            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -301,7 +295,17 @@ export function Marketplace() {
                     </div>
                     
                     <div className="flex gap-2">
-                      <Button size="sm">
+                      <Button 
+                        size="sm"
+                        onClick={() => {
+                          if (!isConnected) {
+                            alert('Please connect your wallet to accept offers')
+                          } else {
+                            // Handle accept offer logic
+                            console.log('Accepting offer', offer.id)
+                          }
+                        }}
+                      >
                         Accept Offer
                       </Button>
                     </div>
