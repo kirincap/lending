@@ -34,3 +34,4 @@ artifacts/
 
 # Test cache
 test-cache/
+.vercel

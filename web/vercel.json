@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npm install lightningcss-linux-x64-gnu && npm run build",
+  "outputDirectory": ".next"
+}
